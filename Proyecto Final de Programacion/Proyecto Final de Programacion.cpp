@@ -3,7 +3,6 @@
 #include <string>
 #include <Lmcons.h>
 #include <windows.h>
-#include <filesystem>
 #include <direct.h>
 
 using namespace std;
@@ -34,13 +33,11 @@ struct teacher
 
 char username[UNLEN + 1];
 DWORD username_len = UNLEN + 1;
-filesystem::path RutaActual = filesystem::current_path();
 
 int N_Estudiantes = 0, N_Docentes = 0;
 student Estudiante;
 teacher Docente;
-string RutaDescargas = "C:/Users/";
-string RutaPrograma = RutaActual.string();
+string RutaDescargas, RutaPrograma;
 
 // -------------------------------------- FUNCIONES PROTOTIPO -----------------------------------------------
 
@@ -61,15 +58,20 @@ string SustantivoPropio(string Palabra);
 int main()
 {
     GetUserNameA(username, &username_len);
-    RutaDescargas += string(username) + "/Downloads/";
+    RutaPrograma = "C:/Users/" + string(username) + "/Desktop/";
+    RutaDescargas = "C:/Users/" + string(username) + "/Downloads/";
 
     ofstream Registro_E, Registro_D;
 
     if (!_mkdir((RutaPrograma + "/Base de Datos").c_str()))
-        cout << Verde << "\n✅ ¡Carpeta Base de Datos creada exitosamente! ✅" << endl;
+        cout << Verde << "\n✅ ¡Carpeta Base de Datos creada exitosamente en el Escritorio! ✅" << endl;
+    else
+        cout << Verde << "\n✅ ¡Carpeta Base de Datos existente, no se creo ninguna alternativa! ✅" << endl;
 
     if (!_mkdir((RutaPrograma + "/Base de Datos/Estudiantes").c_str()) && !_mkdir((RutaPrograma + "/Base de Datos/Docentes").c_str()))
-        cout << Verde << "✅ ¡Carpetas Estudiantes y Docentes creadas exitosamente! ✅" << endl;
+        cout << Verde << "✅ ¡Carpetas Estudiantes y Docentes creadas exitosamente la carpeta Bases de Datos! ✅" << endl;
+    else
+        cout << Verde << "✅ ¡Carpetas Estudiantes y Docentes existentes, no se crearon alternativas! ✅" << endl;
 
     Registro_E.open((RutaPrograma + "/Base de Datos/Estudiantes/Base_Estudiantes.txt").c_str(), ios::out);
 
