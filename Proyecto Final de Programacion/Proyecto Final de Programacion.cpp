@@ -3,7 +3,6 @@
 #include <string>
 #include <Lmcons.h>
 #include <windows.h>
-#include <filesystem>
 #include <direct.h>
 
 using namespace std;
@@ -34,13 +33,11 @@ struct teacher
 
 char username[UNLEN + 1];
 DWORD username_len = UNLEN + 1;
-filesystem::path RutaActual = filesystem::current_path();
 
 int N_Estudiantes = 0, N_Docentes = 0;
 student Estudiante;
 teacher Docente;
-string RutaDescargas = "C:/Users/";
-string RutaPrograma = RutaActual.string();
+string RutaDescargas, RutaPrograma;
 
 // -------------------------------------- FUNCIONES PROTOTIPO -----------------------------------------------
 
@@ -61,7 +58,8 @@ string SustantivoPropio(string Palabra);
 int main()
 {
     GetUserNameA(username, &username_len);
-    RutaDescargas += string(username) + "/Downloads/";
+    RutaPrograma = "C:/Users/" + string(username) + "/Desktop/";
+    RutaDescargas = "C:/Users/" + string(username) + "/Downloads/";
 
     ofstream Registro_E, Registro_D;
 
