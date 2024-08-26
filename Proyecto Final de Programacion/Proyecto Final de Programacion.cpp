@@ -57,6 +57,8 @@ string SustantivoPropio(string Palabra);
 
 int main()
 {
+    system("powershell -Command \"[Console]::OutputEncoding = [System.Text.Encoding]::UTF8\""); // <--- Para que se muestren los emojis en la consola de Windows
+
     GetUserNameA(username, &username_len);
     RutaPrograma = "C:/Users/" + string(username) + "/Desktop/";
     RutaDescargas = "C:/Users/" + string(username) + "/Downloads/";
@@ -209,6 +211,7 @@ int main()
         << Rojo << "Saliendo del programa... 👋" << endl
         << endl
         << Reset;
+
     return 0;
 }
 
